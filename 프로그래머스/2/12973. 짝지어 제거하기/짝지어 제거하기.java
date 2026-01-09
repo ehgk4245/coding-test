@@ -4,21 +4,21 @@ class Solution
 {
     public int solution(String s)
     {
-        Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (stack.empty()) {
-                stack.push(c);
+        Deque<Character> st = new ArrayDeque<>();
+        
+        for (char c : s.toCharArray()) {
+            if (st.isEmpty()) {
+                st.add(c);
+            } else if ((char) st.peekLast() == c) {
+                st.removeLast();
             } else {
-                if (stack.peek() == c) {
-                    stack.pop();
-                } else {
-                    stack.push(c);
-                }
+                st.add(c);
             }
         }
         
-        if (stack.empty()) return 1;
+        if (st.isEmpty()) {
+            return 1;
+        }
         return 0;
     }
 }
