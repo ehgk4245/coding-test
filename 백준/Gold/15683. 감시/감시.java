@@ -5,11 +5,11 @@ public class Main {
 
     static int[][][] dir = {
             {},
-            {{1},{2},{3},{4}},                 // 1번
-            {{1,3},{2,4}},                     // 2번
-            {{1,4},{4,3},{3,2},{2,1}},         // 3번
-            {{1,2,4},{1,2,3},{2,3,4},{1,3,4}}, // 4번
-            {{1,2,3,4}}                        // 5번
+            {{1}, {2}, {3}, {4}},                 // 1번
+            {{1, 3}, {2, 4}},                     // 2번
+            {{1, 4}, {4, 3}, {3, 2}, {2, 1}},         // 3번
+            {{1, 2, 4}, {1, 2, 3}, {2, 3, 4}, {1, 3, 4}}, // 4번
+            {{1, 2, 3, 4}}                        // 5번
     };
 
     static class Position {
@@ -86,24 +86,22 @@ public class Main {
     static void go(Position position, int[][] map, int direction, int num) {
         int n = position.ri;
         int m = position.ci;
-
-        if (direction == 1) n--;
-        else if (direction == 3) n++;
-        else if (direction == 2) m--;
-        else m++;
-
-        while (n >= 0 && n < map.length && m >= 0 && m < map[0].length
-                && map[n][m] != 6) {
-
-            if (map[n][m] == 0) {
-                map[n][m] = num;
+        if (direction == 1) {
+            while (n >= 0 && map[n][m] != 6) {
+                map[n--][m] = num;
             }
-
-            if (direction == 1) n--;
-            else if (direction == 3) n++;
-            else if (direction == 2) m--;
-            else m++;
+        } else if (direction == 3) {
+            while (n < map.length && map[n][m] != 6) {
+                map[n++][m] = num;
+            }
+        } else if (direction == 2) {
+            while (m >= 0 && map[n][m] != 6) {
+                map[n][m--] = num;
+            }
+        } else {
+            while (m < map[0].length && map[n][m] != 6) {
+                map[n][m++] = num;
+            }
         }
     }
-
 }
